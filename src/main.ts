@@ -124,37 +124,134 @@
 
 //type Aliases
 
-type stringOrNumber = string | number
+// type stringOrNumber = string | number
 
-type stringOrNumberArray = (string | number)[]
+// type stringOrNumberArray = (string | number)[]
 
-type Guitarist = {
-       name?: string,
-       active: boolean, //Question mark can be optional
-       albuns: stringOrNumberArray
-    }
+// type Guitarist = {
+//        name?: string,
+//        active: boolean, //Question mark can be optional
+//        albuns: stringOrNumberArray
+//     }
 
-    type UserID = stringOrNumber
+//     type UserID = stringOrNumber
 
-    // Literal types
+//     // Literal types
 
-    let myName: 'Dave'
+//     let myName: 'Dave'
 
-    let userName: 'Dave' | 'John' | 'Ammy'
+//     let userName: 'Dave' | 'John' | 'Ammy'
 
-    userName = 'Dave'
+//     userName = 'Dave'
 
-    // Functions
+//     // Functions
 
-    const add = (a: number, b: number):number => {
+//     const add = (a: number, b: number):number => {
 
-        return a + b;
-    }
+//         return a + b;
+//     }
 
-    const logMsg = (message: any): void => {
+//     const logMsg = (message: any): void => {
 
-        console.log(message)
-    }
+//         console.log(message)
+//     }
 
-    logMsg('Hello!')
-    logMsg(add(2, 3))
+//     logMsg('Hello!')
+//     logMsg(add(2, 3))
+
+//     let subtract = function (c: number, d: number):number {
+//         return c - d
+//     }
+
+//  type mathFunction = (a: number, b: number) => number
+
+//  let multiply: mathFunction = (n, m) => {
+//     return m * n
+//  }
+
+//  logMsg(multiply(2, 2))
+
+//  // Opitional Parameters
+
+//  const addAll = (a:number, b:number, c?:number):number => {
+    
+//     if(typeof c !== 'undefined'){
+//         return a + b + c
+//     }
+//     return a + b
+
+//  }
+
+//  const sumAll = (a:number, b:number, c:number = 0):number => {
+    
+//         return a + b + c
+ 
+
+//  }
+
+//  logMsg(addAll(2, 3, 2))
+//  logMsg(addAll(2, 3))
+
+//  logMsg(sumAll(2, 3, 13))
+
+//  // Rest parameters
+
+//  const total = (...nums: number[]): number => {
+
+//     return nums.reduce((prev, curr) => prev + curr)
+//  }
+
+// const createError = (errMsg: string):never => {
+
+//     throw new Error(errMsg)
+// }
+
+// const numberOrString = (value: number | string):string => {
+
+//     if(typeof value === 'string') return 'string'
+//     if(typeof value === 'number') return 'number'
+
+//     return createError('This Should Never Happen!') 
+// }
+
+//----------------------
+// Type Assertion   
+//----------------------
+
+type One = string
+type Two = string | number
+type Three = 'Hello'
+
+
+// convert to more or less specific 
+
+let a: One = 'Hello'
+let b = a as Two //less specific
+let c = a as Three // More Specific 
+
+let d = <One>'World'
+let e = <string | number>'World'
+
+
+const addOrConcat = (a: number, b:number, c: 'add' | 'concat'): number | string =>{
+
+    if(c === 'add') return a + b
+    return '' + a + b
+}
+
+
+let myVal: string = addOrConcat(2, 2, 'concat') as string 
+
+// String return, Be careful
+let nextVal: number = addOrConcat(2, 2, 'concat') as number
+
+
+(10 as unknown) as string
+
+// The DOM
+
+const img = document.querySelector('img')! // Not null
+const myImg = document.getElementById('#img') as  HTMLImageElement
+
+img.src
+myImg.src
