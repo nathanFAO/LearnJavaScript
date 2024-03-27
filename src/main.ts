@@ -218,40 +218,124 @@
 // Type Assertion   
 //----------------------
 
-type One = string
-type Two = string | number
-type Three = 'Hello'
+// type One = string
+// type Two = string | number
+// type Three = 'Hello'
 
 
-// convert to more or less specific 
+// // convert to more or less specific 
 
-let a: One = 'Hello'
-let b = a as Two //less specific
-let c = a as Three // More Specific 
+// let a: One = 'Hello'
+// let b = a as Two //less specific
+// let c = a as Three // More Specific 
 
-let d = <One>'World'
-let e = <string | number>'World'
+// let d = <One>'World'
+// let e = <string | number>'World'
 
 
-const addOrConcat = (a: number, b:number, c: 'add' | 'concat'): number | string =>{
+// const addOrConcat = (a: number, b:number, c: 'add' | 'concat'): number | string =>{
 
-    if(c === 'add') return a + b
-    return '' + a + b
+//     if(c === 'add') return a + b
+//     return '' + a + b
+// }
+
+
+// let myVal: string = addOrConcat(2, 2, 'concat') as string 
+
+// // String return, Be careful
+// let nextVal: number = addOrConcat(2, 2, 'concat') as number
+
+
+// (10 as unknown) as string
+
+// // The DOM
+
+// const img = document.querySelector('img')! // Not null
+// const myImg = document.getElementById('#img') as  HTMLImageElement
+// const nextImg = <HTMLImageElement>document.getElementById('#img')
+
+
+// img.src
+// myImg.src
+
+//----------------------
+// Classes
+//----------------------
+
+class Coder {
+    
+   secondLang!: string
+
+    constructor(
+        public readonly name:string,
+        public  music: string,
+        private age:number,
+        protected lang:string = 'Typescript'
+        ){
+
+        this.name = name
+        this.music = music
+        this.age = age
+        this.lang = lang
+        
+        
+    }
+
+    public getAge() {
+
+        return `Hello, I'm ${this.age}`
+    }
 }
 
 
-let myVal: string = addOrConcat(2, 2, 'concat') as string 
-
-// String return, Be careful
-let nextVal: number = addOrConcat(2, 2, 'concat') as number
 
 
-(10 as unknown) as string
 
-// The DOM
+const dave = new Coder('Dave', 'Rock', 42)
+console.log(dave.getAge())
+// console.log(dave.age)
+// console.log(dave.lang)
 
-const img = document.querySelector('img')! // Not null
-const myImg = document.getElementById('#img') as  HTMLImageElement
+class WebDev extends Coder {
 
-img.src
-myImg.src
+    constructor(
+        public computer: string,
+        name: string,
+        music: string,
+        age: number,
+    ){
+        super(name, music, age)
+        this.computer = computer
+
+        
+    }
+    public getLang(){
+        return `I write ${this.lang}`    }
+}
+
+const Sara = new WebDev('Mac', 'Sara', 'Lofi', 25)
+
+console.log(Sara.getLang())
+// console.log(Sara.age)
+// console.log(Sara.lang)
+
+/////////////////////////////////////////
+
+interface Musician {
+    name: string,
+    instrument: string,
+    play(action: string): string,
+
+}
+
+class Guitarist implements Musician {
+    
+    name: string
+    instrument: string
+
+    constructor(name: string, instrument: string){
+        this.name = name
+        this.instrument = instrument
+    }
+
+}
